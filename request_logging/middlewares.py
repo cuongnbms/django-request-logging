@@ -9,6 +9,16 @@ logger = logging.getLogger('request_logging')
 
 
 def get_ip_client(request):
+    """Best-effort extraction of the client IP for logging purposes.
+
+    The value is derived from client-supplied headers (``IP-Address``,
+    ``CF-Connecting-IP``, ``X-Forwarded-For``) before falling back to
+    ``REMOTE_ADDR``. Those headers can be forged by the caller, so the result
+    is suitable for logging/analytics only and MUST NOT be trusted for
+    security decisions (authentication, rate limiting, access control). If you
+    need a trustworthy client IP, configure it from a proxy you control (e.g.
+    Django's ``SECURE_PROXY_SSL_HEADER`` / a vetted forwarded-header parser).
+    """
     client_ip_address = request.META.get('HTTP_IP_ADDRESS')
     if client_ip_address:
         return client_ip_address

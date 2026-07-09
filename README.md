@@ -5,7 +5,7 @@ Django Request Logging is a Django app that logs detailed request information, s
 ## Install
 
 ```bash
-pip install git+https://github.com/cuongnb14/django-request-logging.git@v1.3#egg=django-request-logging
+pip install git+https://github.com/cuongnb14/django-request-logging.git@v1.4#egg=django-request-logging
 ```
 
 ## Setup
@@ -61,3 +61,15 @@ python3 manage.py remove_old_request_log 3m
 ```
 
 The argument is `<value><unit>` where unit is `d` (days) or `m` (months). Schedule it via cron/Celery beat to keep the table bounded.
+
+## Running tests
+
+The suite is self-contained (SQLite in-memory, no extra config). From the repo root:
+
+```bash
+python -m venv .venv
+.venv/bin/pip install "Django>=4.0"
+.venv/bin/python runtests.py
+```
+
+Run a subset with e.g. `python runtests.py tests.test_middleware`.
