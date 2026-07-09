@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "django-request-logging"
 version = "1.3"
 description = "Log request info to database"
-readme = "README.rst"
+readme = "README.md"
 license = "MIT"
 authors = [
     { name = "Cuong Nguyen", email = "cuongnb14@gmail.com" },
