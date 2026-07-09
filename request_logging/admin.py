@@ -11,6 +11,7 @@ class RequestLogAdmin(admin.ModelAdmin):
                     'request_at')
     search_fields = ('client_ip', 'path', 'user__username')
     search_help_text = 'Search by client ip, path or username'
+    show_full_result_count = False
 
     fieldsets = (
         (

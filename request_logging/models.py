@@ -18,5 +18,13 @@ class RequestLog(models.Model):
     response_time = models.FloatField()
     request_at = models.DateTimeField(default=timezone.now)
 
+    class Meta:
+        ordering = ['-request_at']
+        indexes = [
+            models.Index(fields=['request_at'], name='request_log_request_at_idx'),
+            models.Index(fields=['client_ip'], name='request_log_client_ip_idx'),
+            models.Index(fields=['response_code'], name='request_log_resp_code_idx'),
+        ]
+
     def __str__(self):
         return self.path

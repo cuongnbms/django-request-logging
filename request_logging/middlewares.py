@@ -1,5 +1,4 @@
 import time
-import json
 
 from .models import RequestLog
 from .settings import REQUEST_LOGGING_SETTINGS
@@ -44,17 +43,16 @@ class RequestLogMiddleware:
 
             client_ip = get_ip_client(request)
 
-            header_keys = ["HTTP_USER_AGENT", "HTTP_X_FORWARDED_FOR", "REMOTE_ADDR", "HTTP_REFERER"]
             headers = {}
             for k in REQUEST_LOGGING_SETTINGS["LOG_HEADER_KEYS"]:
                 headers[k] = request.META.get(k, '')
 
             data = {
-                'user_id': request.user.id if request.user else None,
+                'user_id': getattr(request.user, 'id', None) if hasattr(request, 'user') else None,
                 'method': request.method,
                 'hostname': request.META.get('HTTP_HOST', ''),
                 'path': request.path,
-                'request_params': request.GET,
+                'request_params': dict(request.GET),
                 'client_ip': client_ip,
                 'headers': headers,
                 'response_code': response.status_code,
