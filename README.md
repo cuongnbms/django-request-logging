@@ -5,7 +5,7 @@ Django Request Logging is a Django app that logs detailed request information, s
 ## Install
 
 ```bash
-pip install git+https://github.com/cuongnb14/django-request-logging.git@v1.4#egg=django-request-logging
+pip install git+https://github.com/cuongnbms/django-request-logging.git@v1.4#egg=django-request-logging
 ```
 
 ## Setup
